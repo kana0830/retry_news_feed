@@ -1,5 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:retry_news_feed/data/category_info.dart';
+import '../../compornents/category_chips.dart';
 
 class NewsListPage extends StatelessWidget {  
   @override
@@ -23,8 +24,12 @@ class NewsListPage extends StatelessWidget {
                 hintStyle: MaterialStateProperty.all(TextStyle(color: Colors.white60)),
                 onSubmitted: (keyWord) => getKeywordNews(context, keyWord),
               ),
-              // TODO カテゴリーチップス
-              //CategoryChips(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CategoryChips(
+                  onCategorySelected: (category) => getCategoryNews(context, category),
+                ),
+              ),
               // TODO 記事表示
               Expanded(
                 child: Center(
@@ -43,5 +48,9 @@ class NewsListPage extends StatelessWidget {
   // TODO
   getKeywordNews(BuildContext context, String keyWord) {
     print("News");
+  }
+  // TODO
+  getCategoryNews(BuildContext context, category) {
+    print("category");
   }
 }
