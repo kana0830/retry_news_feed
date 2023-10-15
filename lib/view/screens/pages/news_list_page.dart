@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:retry_news_feed/data/category_info.dart';
+import 'package:retry_news_feed/data/search_type.dart';
+import 'package:retry_news_feed/viewmodels/news_list_viewmodel.dart';
 import '../../compornents/category_chips.dart';
 
-class NewsListPage extends StatelessWidget {  
+class NewsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,15 +22,20 @@ class NewsListPage extends StatelessWidget {
               // TODO 検索ワード
               SearchBar(
                 controller: TextEditingController(),
-                leading: Icon(Icons.search, color: Colors.white60,),
+                leading: Icon(
+                  Icons.search,
+                  color: Colors.white60,
+                ),
                 hintText: "検索ワードを入れてください",
-                hintStyle: MaterialStateProperty.all(TextStyle(color: Colors.white60)),
+                hintStyle:
+                    MaterialStateProperty.all(TextStyle(color: Colors.white60)),
                 onSubmitted: (keyWord) => getKeywordNews(context, keyWord),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CategoryChips(
-                  onCategorySelected: (category) => getCategoryNews(context, category),
+                  onCategorySelected: (category) =>
+                      getCategoryNews(context, category),
                 ),
               ),
               // TODO 記事表示
@@ -43,14 +51,32 @@ class NewsListPage extends StatelessWidget {
     );
   }
 
-  // TODO
-  onFresh(BuildContext context) {}
-  // TODO
-  getKeywordNews(BuildContext context, String keyWord) {
-    print("News");
+  // 記事更新処理
+  onFresh(BuildContext context) {
+    final viewModel = context.read<NewsListViewModel>();
+    viewModel.getNews(
+      searchType: viewModel.searchType,
+      keyWord: viewModel.keyWord,
+      category: viewModel.category,
+    );
   }
-  // TODO
+
+  // キーワード記事取得処理
+  getKeywordNews(BuildContext context, String keyWord) {
+    final viewModel = context.read<NewsListViewModel>();
+    viewModel.getNews(
+      searchType: SearchType.KEYWORD,
+      keyWord: keyWord,
+      category: categories[0],
+    );
+  }
+
+  // カテゴリー記事取得処理
   getCategoryNews(BuildContext context, category) {
-    print("category");
+    final viewModel = context.read<NewsListViewModel>();
+    viewModel.getNews(
+      searchType: SearchType.CATEGORY,
+      category: category,
+    );
   }
 }
