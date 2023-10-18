@@ -8,11 +8,11 @@ import '../../compornents/category_chips.dart';
 class NewsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final viewModel = context.read<NewsListViewModel>();
 
-    if(!viewModel.isLoading && viewModel.article.isEmpty){
-      Future(() => viewModel.getNews(searchType: SearchType.CATEGORY, category: categories[0]));
+    if (!viewModel.isLoading && viewModel.article.isEmpty) {
+      Future(() => viewModel.getNews(
+          searchType: SearchType.CATEGORY, category: categories[0]));
     }
 
     return SafeArea(
@@ -47,8 +47,22 @@ class NewsListPage extends StatelessWidget {
               ),
               // TODO 記事表示
               Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(),
+                child: Consumer<NewsListViewModel>(
+                  builder: (context, model, child) {
+                    return model.isLoading
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ListView.builder(
+                            itemCount: model.article.length,
+                            itemBuilder: (context, int position) => ListTile(
+                              title: Text(model.article[position].title ?? ""),
+                              subtitle: Text(
+                                model.article[position].description ?? "",
+                              ),
+                            ),
+                          );
+                  },
                 ),
               ),
             ],
