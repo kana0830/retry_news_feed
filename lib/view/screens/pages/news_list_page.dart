@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:retry_news_feed/data/category_info.dart';
 import 'package:retry_news_feed/data/search_type.dart';
+import 'package:retry_news_feed/view/compornents/article_tile.dart';
 import 'package:retry_news_feed/viewmodels/news_list_viewmodel.dart';
 import '../../compornents/category_chips.dart';
 
@@ -10,7 +11,7 @@ class NewsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.read<NewsListViewModel>();
 
-    if (!viewModel.isLoading && viewModel.article.isEmpty) {
+    if (!viewModel.isLoading && viewModel.articles.isEmpty) {
       Future(() => viewModel.getNews(
           searchType: SearchType.CATEGORY, category: categories[0]));
     }
@@ -54,14 +55,11 @@ class NewsListPage extends StatelessWidget {
                             child: CircularProgressIndicator(),
                           )
                         : ListView.builder(
-                            itemCount: model.article.length,
-                            itemBuilder: (context, int position) => ListTile(
-                              title: Text(model.article[position].title ?? ""),
-                              subtitle: Text(
-                                model.article[position].description ?? "",
+                            itemCount: model.articles.length,
+                            itemBuilder: (context, int position) => ArticleTile(article: model.articles[position], onArticleClicked: (article) => _openArticleWebPage(article, context)
                               ),
                             ),
-                          );
+                          ),
                   },
                 ),
               ),
@@ -100,4 +98,6 @@ class NewsListPage extends StatelessWidget {
       category: category,
     );
   }
+
+  _openArticleWebPage(article, BuildContext context) {}
 }

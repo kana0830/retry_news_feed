@@ -11,6 +11,7 @@ class NewsRepository {
   static const BASE_URL = "https://newsapi.org/v2/top-headlines?country=jp";
   static const API_KEY = "44928f48f2df4023b16683cd57974a6b";
 
+
   Future<List<Article>> getNews({required SearchType searchType, String? keyWord, Category? category}) async {
     List<Article> result = [];
     http.Response? response;
