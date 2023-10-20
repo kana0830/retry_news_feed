@@ -56,10 +56,11 @@ class NewsListPage extends StatelessWidget {
                           )
                         : ListView.builder(
                             itemCount: model.articles.length,
-                            itemBuilder: (context, int position) => ArticleTile(article: model.articles[position], onArticleClicked: (article) => _openArticleWebPage(article, context)
-                              ),
-                            ),
-                          ),
+                            itemBuilder: (context, int position) => ArticleTile(
+                                article: model.articles[position],
+                                onArticleClicked: (article) =>
+                                    _openArticleWebPage(article, context)),
+                          );
                   },
                 ),
               ),
@@ -99,5 +100,7 @@ class NewsListPage extends StatelessWidget {
     );
   }
 
-  _openArticleWebPage(article, BuildContext context) {}
+  _openArticleWebPage(article, BuildContext context) {
+    print("_openArticleWebPage: ${article.url}");
+  }
 }

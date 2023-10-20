@@ -15,26 +15,29 @@ class ArticleTile extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: InkWell(
-        onTap: () => onArticleClicked(article),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 1,
-              child: Container(),
-            ),
-            Expanded(
-              flex: 3,
-              child: Column(
-                children: [
-                  Text(article.title ?? ""),
-                  Text(article.publishDate ?? ""),
-                  Text(article.description ?? ""),
-                ],
+      child: Padding(ß
+        padding: const EdgeInsets.all(8.0),
+        child: InkWell(
+          onTap: () => onArticleClicked(article),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(),
               ),
-            ),
-          ],
+              Expanded(
+                flex: 3,
+                child: Column(
+                  children: [
+                    Text(article.title ?? ""),
+                    Text(article.publishDate ?? ""),
+                    Text(article.description ?? ""),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
