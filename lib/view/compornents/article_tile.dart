@@ -15,7 +15,7 @@ class ArticleTile extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: Padding(ß
+      child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
           onTap: () => onArticleClicked(article),
