@@ -4,6 +4,7 @@ import 'package:retry_news_feed/data/category_info.dart';
 import 'package:retry_news_feed/data/search_type.dart';
 import 'package:retry_news_feed/view/compornents/article_tile.dart';
 import 'package:retry_news_feed/viewmodels/news_list_viewmodel.dart';
+import '../../../models/model/news_model.dart';
 import '../../compornents/category_chips.dart';
 
 class NewsListPage extends StatelessWidget {
@@ -100,7 +101,7 @@ class NewsListPage extends StatelessWidget {
     );
   }
 
-  _openArticleWebPage(article, BuildContext context) {
+  _openArticleWebPage(Article article, BuildContext context) {
     print("_openArticleWebPage: ${article.url}");
   }
 }
