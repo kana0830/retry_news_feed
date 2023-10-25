@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retry_news_feed/view/compornents/image_from_url.dart';
 
 import '../../models/model/news_model.dart';
 
@@ -24,7 +25,10 @@ class ArticleTile extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: Container(),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ImageFromUrl(imageUrl: article.urlToImage,),
+                ),
               ),
               Expanded(
                 flex: 3,
